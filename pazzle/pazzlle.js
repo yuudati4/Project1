@@ -1,10 +1,11 @@
 window.onload = function() {
     function init() {
-      var arr = [''];
+      var arr = [];
       for (i = 0; i < 8; i++) {
         arr.push((i + 1).toString());
       }
-      shuffle(arr);
+      arr.push('');
+      // shuffle(arr);
       drawing(arr);
     }
   
@@ -58,45 +59,38 @@ window.onload = function() {
     }
   
     function addEventListenerClick(arr) {
+
+      const answerList = [1,2,3,4,5,6,7,8,9,,]
+
       var $tile = document.querySelectorAll('.tile');
       $tile.forEach(function(elem) {
         elem.addEventListener('click', function() {
           var i = arr.indexOf(this.textContent);
           var j;
+
+          console.log("i: " + i + " j: " + j);
+          console.log("arr[]" + arr);
+
           if (i <= 5 && arr[i + 3] === '') {
             j = i + 3;
-            if (isOK(arr)) {
-              // クリア処理
-              swap(i, j, arr);
-              alert('パズルをクリアしました！');
-            }
           } else if (i >= 3 && arr[i - 3] === '') {
             j = i - 3;
-            if (isOK(arr)) {
-              // クリア処理
-              swap(i, j, arr);
-              alert('パズルをクリアしました！');
-            }
-          } else if (i % 3 !== 2 && arr[i + 1] === '') {
+          } else if (i % 3 !== 2 & arr[i + 1] === '') {
             j = i + 1;
-            if (isOK(arr)) {
-              // クリア処理
-              swap(i, j, arr);
-              alert('パズルをクリアしました！');
-            }
           } else if (i % 3 !== 0 && arr[i - 1] === '') {
             j = i - 1;
-            if (isOK(arr)) {
-              // クリア処理
-              swap(i, j, arr);
-              alert('パズルをクリアしました！');
-            }
           } else {
             return;
           }
+
           swap(i, j, arr);
-       
           drawing(arr);
+
+          if (isOK(arr)) {
+            // クリア処理
+            alert('パズルをクリアしました！');
+          }
+       
         });
       });
     }

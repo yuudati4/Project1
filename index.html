@@ -7,6 +7,21 @@
 </head>
 
 <body>
+    <script>
+        function viewportSet() {
+          var wsw = window.screen.width;
+          if (wsw <= 460) {
+            // デバイス横幅460以下
+            document.querySelector("meta[name='viewport']").setAttribute("content", "width=device-width,initial-scale=1.0,viewport-fit=cover");
+          } else {
+            // それ以外
+            document.querySelector("meta[name='viewport']").setAttribute("content", "width=1280");
+          }
+        }
+        window.addEventListener("DOMContentLoaded", viewportSet, false);
+        window.addEventListener("resize", viewportSet, false);
+        window.addEventListener("orientationchange", viewportSet, false);
+      </script>
     <div id="all">
         <header>
             <meta charset="UTF-8">

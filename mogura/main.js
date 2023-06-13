@@ -40,12 +40,12 @@ function gameStart(){// ゲーム画面
     background1.x = 0;
     background1.y = 0;
     scene.addChild(background1);
-    var background1 = new Sprite(320, 480);
+    var background1 = new Sprite(320, 250);
     background1.image = core.assets['images/wack_a_mole_grass_bg_2.png'];
     background1.x = 0;
     background1.y = 120;
     scene.addChild(background1);
-    var background1 = new Sprite(320, 480);
+    var background1 = new Sprite(320, 250);
     background1.image = core.assets['images/wack_a_mole_grass_bg_3.png'];
     background1.x = 0;
     background1.y = 250;
@@ -163,9 +163,10 @@ function gameStart(){// ゲーム画面
 
     // タイム
     timeLabel = new Label('時間 : 30秒');
-    timeLabel.x = 10;
-    timeLabel.y = 10;
-    timeLabel.color = 'white';
+    timeLabel.x = core.width+36;
+    timeLabel.y = 30;
+    timeLabel.color = 'black';
+    timeLabel.scale(3, 3);
     timeLabel.score = 30;
     scene.addChild(timeLabel);
     scene.tl.setTimeBased();
@@ -173,8 +174,10 @@ function gameStart(){// ゲーム画面
         timeLabel.score -= 1;
         timeLabel.text = '時間 : ' + timeLabel.score + '秒';
         if (timeLabel.score == 0) {
+            timeLabel.remove();
+            scoreLabel.remove();
             gameover = new Label('叩いたモグラの数：' + scoreLabel.score);
-            gameover.font = "200% 'Lora'";
+            gameover.font = "250% 'Lora'";
             gameover.textAlign = 'center';
             gameover.width = core.width;
             gameover.y = core.height / 2 - gameover._boundHeight / 2;
@@ -185,14 +188,15 @@ function gameStart(){// ゲーム画面
     }).loop();
 
     // スコア
-    scoreLabel = new Label('得点 : 0');
-    scoreLabel.x = 10;
-    scoreLabel.y = 30;
-    scoreLabel.color = 'white';
+    scoreLabel = new Label('得点 : 0点');
+    scoreLabel.x = core.width+36;
+    scoreLabel.y = 520;
+    scoreLabel.scale(3, 3);
+    scoreLabel.color = 'black';
     scoreLabel.score = 0;
     scene.addChild(scoreLabel);
     scoreLabel.addEventListener(Event.ENTER_FRAME, function() {
-        scoreLabel.text = '得点 : ' + scoreLabel.score;
+        scoreLabel.text = '得点 : ' + scoreLabel.score + '点';
     });
 }
 
@@ -219,10 +223,9 @@ function titleStart(){// タイトル画面
 var core;
 enchant();
 window.onload = function() {
-core = new Core(320, 480);
+core = new Core(320, 600);
 core.fps = 16;
 core.preload(assets);
 core.onload = function(){titleStart();};
 core.start();
 };
-//update
